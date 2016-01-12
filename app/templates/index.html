@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+  <title>This is a test page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+  {% for item in css %}
+    <link rel="stylesheet" href="/static/{{item}}" />
+  {% endfor %}
+</head>
+<body>
+  <div id="container"></div>
+  {% for item in js %}
+    <script src="/static/{{item}}" type="text/javascript"></script>
+  {% endfor %}
+</body>
+</html>

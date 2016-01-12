@@ -1,0 +1,3 @@
+exporter.egg-info/
+node_modules
+*.pyc

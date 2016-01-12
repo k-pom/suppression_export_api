@@ -1,0 +1,4 @@
+# brew install postgres
+Flask==0.10.1
+Flask-RESTful==0.3.4
+flask-swagger==0.2.10
