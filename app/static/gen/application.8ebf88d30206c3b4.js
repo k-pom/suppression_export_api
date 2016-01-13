@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
+"use strict";
 
 exports.__esModule = true;
 exports.verifyLogin = verifyLogin;
@@ -9,13 +9,9 @@ exports.LOGGED_IN = LOGGED_IN;
 
 function verifyLogin(apiKey) {
 
-    console.log("Verifying ", apiKey);
     return function (dispatch) {
         return new Promise(function (success, failure) {
-            success({
-                apiKey: apiKey,
-                valid: apiKey == 'valid'
-            });
+            $.get("/users/" + apiKey, success);
         }).then(function (response) {
             dispatch({ type: LOGGED_IN, data: response });
         });
@@ -152,7 +148,6 @@ var NavBar = (function (_Component) {
     }
 
     NavBar.prototype.updateApiKey = function updateApiKey(e) {
-        console.log("Doing it...");
         _store.store.dispatch(_actionsLogin.verifyLogin(e.target.value));
     };
 
@@ -250,7 +245,6 @@ function store(state, action) {
 
     switch (action.type) {
         case _actionsLogin.LOGGED_IN:
-            console.log("I care about login change");
             return Object.assign({}, state, action.data);
         default:
             return state;

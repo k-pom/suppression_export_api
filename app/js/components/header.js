@@ -11,7 +11,6 @@ export default class NavBar extends Component {
     }
 
     updateApiKey(e){
-        console.log("Doing it...")
         store.dispatch(verifyLogin(e.target.value));
     }
 

@@ -1,11 +1,12 @@
 #! /usr/bin/env python
 
-from exporter.http import export_list, export, docs
+from exporter.http import export_list, export, docs, user
 from app import api, app as application
 
 resources = {
     '/exports': export_list.ExportListResource,
     '/exports/<int:export_id>': export.ExportResource,
+    '/users/<string:apiKey>': user.ApiKeyResource,
     '/docs.json': docs.DocsResource
 }
 
