@@ -11,7 +11,9 @@ export default class NavBar extends Component {
     }
 
     updateApiKey(e){
-        store.dispatch(verifyLogin(e.target.value));
+        if(e.target.value.length > 0 ){
+            store.dispatch(verifyLogin(e.target.value));            
+        }
     }
 
     render() {
