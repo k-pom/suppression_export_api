@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     // clean up the static directories
-    clean: ['<%= pkg.name %>/static'],
+    clean: ['<%= pkg.name %>/static/gen'],
 
     // browserify stuff
     browserify: {
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          "<%= pkg.name %>/static/application.js": "<%= pkg.name %>/js/application.js"
+          "<%= pkg.name %>/static/gen/application.js": "<%= pkg.name %>/js/application.js"
         }
       }
     },
@@ -40,13 +40,13 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= pkg.name>/sass',
           src: ['**/*.{scss,sass}'],
-          dest: '<%= pkg.name>/static',
+          dest: '<%= pkg.name>/static/gen',
           ext: '.css'
         }]
       },
       dist: {
         files: {
-          "<%= pkg.name %>/static/application.css": "<%= pkg.name %>/sass/application.scss"
+          "<%= pkg.name %>/static/gen/application.css": "<%= pkg.name %>/sass/application.scss"
         }
       }
     },
@@ -54,8 +54,8 @@ module.exports = function(grunt) {
     // uglify the things
     uglify: {
       build: {
-        src: '<%= pkg.name %>/static/application.js',
-        dest: '<%= pkg.name %>/static/application.js'
+        src: '<%= pkg.name %>/static/gen/application.js',
+        dest: '<%= pkg.name %>/static/gen/application.js'
       }
     },
 
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
         mapping: true
       },
       build: {
-        src: '<%= pkg.name %>/static/**/*'
+        src: '<%= pkg.name %>/static/gen/**/*'
       }
     },
 
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
     // run the flask app in development mode
     shell: {
       target: {
-        command: 'exporter/application.py'
+        command: 'app/application.py'
       }
     },
 

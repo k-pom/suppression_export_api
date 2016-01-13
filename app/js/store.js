@@ -4,10 +4,12 @@ import thunk from 'redux-thunk';
 
 // stores
 import routerReducer from './reducers/router';
+import loginReducer from './reducers/login';
 
 // wire up the application
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 export const store = createStoreWithMiddleware(combineReducers({
-  router: routerReducer
+  router: routerReducer,
+  login: loginReducer
 }));

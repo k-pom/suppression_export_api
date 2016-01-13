@@ -1,10 +1,10 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { NavBar } from './header'
+import NavBar from './header'
 
 
-@connect((store) => ({router: store.router}))
+@connect((store) => ({router: store.router }))
 export default class Application extends Component {
 
   proptypes: {
@@ -12,6 +12,10 @@ export default class Application extends Component {
   }
 
   render() {
-    return (<div><NavBar /><h1>adsfasdf{this.props.router.path}</h1></div>);
+    console.log(this.props);
+    return (<div>
+              <NavBar />
+              <h1>adsfasdf{this.props.router.path}</h1>
+            </div>);
   }
 }

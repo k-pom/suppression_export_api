@@ -8,8 +8,6 @@ export const initialState = {
 
 
 export default function store(state=initialState, action) {
-  console.log(action);
-
   switch (action.type) {
     case SET_PATH:
       return Object.assign({}, state, {path: action.path});
