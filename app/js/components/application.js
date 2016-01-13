@@ -4,18 +4,17 @@ import { connect } from 'react-redux'
 import NavBar from './header'
 
 
-@connect((store) => ({router: store.router }))
+@connect((store) => ({router: store.router, login: store.login }))
 export default class Application extends Component {
 
-  proptypes: {
-    router: PropTypes.object.isRequired
-  }
+    proptypes: {
+        router: PropTypes.object.isRequired
+    }
 
-  render() {
-    console.log(this.props);
-    return (<div>
-              <NavBar />
-              <h1>adsfasdf{this.props.router.path}</h1>
-            </div>);
-  }
+    render() {
+        return (<div>
+                    <NavBar login={this.props.login} />
+                    <h1>initialheader-{this.props.router.path}</h1>
+                </div>);
+    }
 }

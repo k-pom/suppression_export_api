@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
 exports.__esModule = true;
 exports.verifyLogin = verifyLogin;
@@ -9,12 +9,13 @@ exports.LOGGED_IN = LOGGED_IN;
 
 function verifyLogin(apiKey) {
 
-    console.log("Verifying...");
+    console.log("Verifying ", apiKey);
     return function (dispatch) {
         return new Promise(function (success, failure) {
-            console.log("HERE");
-            console.log(apiKey);
-            success(apiKey == 'valid');
+            success({
+                apiKey: apiKey,
+                valid: apiKey == 'valid'
+            });
         }).then(function (response) {
             dispatch({ type: LOGGED_IN, data: response });
         });
@@ -31,8 +32,6 @@ var SET_PATH = 'SET_PATH';
 exports.SET_PATH = SET_PATH;
 
 function setPath(path) {
-  console.log(path);
-
   return function (dispatch) {
     dispatch({ type: SET_PATH, path: path });
   };
@@ -61,8 +60,6 @@ var _router = require('./router');
 
 var _store = require('./store');
 
-var _actionsLogin = require('./actions/login');
-
 // render the application
 _reactDom.render(_react2['default'].createElement(
   _reactRedux.Provider,
@@ -71,9 +68,8 @@ _reactDom.render(_react2['default'].createElement(
 ), document.getElementById('container'));
 
 _router.router.init('/');
-_store.store.dispatch(_actionsLogin.verifyLogin('jfdklas'));
 
-},{"./actions/login":1,"./components/application":4,"./router":8,"./store":9,"react":177,"react-dom":41,"react-redux":44}],4:[function(require,module,exports){
+},{"./components/application":4,"./router":8,"./store":9,"react":177,"react-dom":41,"react-redux":44}],4:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -95,34 +91,33 @@ var _header = require('./header');
 var _header2 = _interopRequireDefault(_header);
 
 var Application = (function (_Component) {
-  _inherits(Application, _Component);
+    _inherits(Application, _Component);
 
-  function Application() {
-    _classCallCheck(this, _Application);
+    function Application() {
+        _classCallCheck(this, _Application);
 
-    _Component.apply(this, arguments);
-  }
+        _Component.apply(this, arguments);
+    }
 
-  Application.prototype.render = function render() {
-    console.log(this.props);
-    return _react2['default'].createElement(
-      'div',
-      null,
-      _react2['default'].createElement(_header2['default'], null),
-      _react2['default'].createElement(
-        'h1',
-        null,
-        'adsfasdf',
-        this.props.router.path
-      )
-    );
-  };
+    Application.prototype.render = function render() {
+        return _react2['default'].createElement(
+            'div',
+            null,
+            _react2['default'].createElement(_header2['default'], { login: this.props.login }),
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'initialheader-',
+                this.props.router.path
+            )
+        );
+    };
 
-  var _Application = Application;
-  Application = _reactRedux.connect(function (store) {
-    return { router: store.router };
-  })(Application) || Application;
-  return Application;
+    var _Application = Application;
+    Application = _reactRedux.connect(function (store) {
+        return { router: store.router, login: store.login };
+    })(Application) || Application;
+    return Application;
 })(_react.Component);
 
 exports['default'] = Application;
@@ -143,39 +138,109 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _actionsLogin = require('../actions/login');
+
+var _store = require('../store');
+
 var NavBar = (function (_Component) {
-  _inherits(NavBar, _Component);
+    _inherits(NavBar, _Component);
 
-  function NavBar() {
-    _classCallCheck(this, NavBar);
+    function NavBar() {
+        _classCallCheck(this, NavBar);
 
-    _Component.apply(this, arguments);
-  }
+        _Component.apply(this, arguments);
+    }
 
-  NavBar.prototype.render = function render() {
-    return _react2['default'].createElement(
-      'h1',
-      null,
-      'I am a header'
-    );
-  };
+    NavBar.prototype.updateApiKey = function updateApiKey(e) {
+        console.log("Doing it...");
+        _store.store.dispatch(_actionsLogin.verifyLogin(e.target.value));
+    };
 
-  return NavBar;
+    NavBar.prototype.render = function render() {
+        var _this = this;
+
+        var icon;
+        if (this.props.login.valid) {
+            icon = _react2['default'].createElement('span', { className: 'glyphicon glyphicon-ok icon-success', 'aria-hidden': 'true' });
+        } else {
+            icon = _react2['default'].createElement('span', { className: 'glyphicon glyphicon-remove icon-error', 'aria-hidden': 'true' });
+        }
+
+        return _react2['default'].createElement(
+            'nav',
+            { className: 'navbar navbar-inverse navbar-fixed-top' },
+            _react2['default'].createElement(
+                'div',
+                { className: 'container-fluid' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'navbar-header' },
+                    _react2['default'].createElement(
+                        'a',
+                        { className: 'navbar-brand', href: '#' },
+                        'Suppression Exporter'
+                    )
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { id: 'navbar', className: 'navbar-collapse collapse' },
+                    _react2['default'].createElement(
+                        'ul',
+                        { className: 'nav navbar-nav navbar-right' },
+                        _react2['default'].createElement(
+                            'li',
+                            null,
+                            _react2['default'].createElement(
+                                'a',
+                                { href: '/docs' },
+                                'Documentation'
+                            )
+                        ),
+                        _react2['default'].createElement(
+                            'li',
+                            null,
+                            _react2['default'].createElement(
+                                'a',
+                                { href: 'http://www.mailgun.com' },
+                                'Mailgun'
+                            )
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'form',
+                        { className: 'navbar-form navbar-right' },
+                        this.props.login.apiKey == "" ? "" : icon,
+                        _react2['default'].createElement('input', { type: 'text',
+                            className: 'form-control',
+                            placeholder: 'ApiKey...',
+                            onBlur: function (e) {
+                                return _this.updateApiKey(e);
+                            }
+                            //    value={this.state.login.apiKey}
+                        })
+                    )
+                )
+            )
+        );
+    };
+
+    return NavBar;
 })(_react.Component);
 
 exports['default'] = NavBar;
 module.exports = exports['default'];
 
-},{"react":177}],6:[function(require,module,exports){
-'use strict';
+},{"../actions/login":1,"../store":9,"react":177}],6:[function(require,module,exports){
+"use strict";
 
 exports.__esModule = true;
-exports['default'] = store;
+exports["default"] = store;
 
 var _actionsLogin = require('../actions/login');
 
 var initialState = {
-    loggedIn: false
+    valid: false,
+    apiKey: ""
 };
 
 exports.initialState = initialState;
@@ -185,7 +250,8 @@ function store(state, action) {
 
     switch (action.type) {
         case _actionsLogin.LOGGED_IN:
-            return Object.assign({}, state, { loggedIn: action.loggedIn });
+            console.log("I care about login change");
+            return Object.assign({}, state, action.data);
         default:
             return state;
     }

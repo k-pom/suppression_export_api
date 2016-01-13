@@ -3,12 +3,13 @@ export const LOGGED_IN = 'LOGGED_IN';
 
 export function verifyLogin(apiKey){
 
-    console.log("Verifying...");
+    console.log("Verifying ", apiKey);
     return (dispatch) => {
         return new Promise(function(success, failure){
-            console.log("HERE");
-            console.log(apiKey);
-            success((apiKey=='valid'));
+            success({
+                apiKey: apiKey,
+                valid: (apiKey=='valid')
+            });
       }).then(function(response){
           dispatch({type: LOGGED_IN, data: response})
       });

@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import Application from './components/application';
 import { router } from './router';
 import { store } from './store';
-import { verifyLogin } from './actions/login';
 
 // render the application
 render(
@@ -16,4 +15,3 @@ render(
 );
 
 router.init('/');
-store.dispatch(verifyLogin('jfdklas'));
