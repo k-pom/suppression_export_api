@@ -26,4 +26,5 @@ class ApiKeyResource(Resource):
         url = "https://api.mailgun.net/v3/domains"
 
         response = requests.get(url, auth=('api', apiKey))
-        return {"apiKey": apiKey, "valid": response.status_code <=299}
+        valid = (response.status_code <= 299)
+        return {"apiKey": apiKey, "valid": valid}

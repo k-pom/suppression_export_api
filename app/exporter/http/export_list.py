@@ -19,7 +19,6 @@ class ExportListResource(Resource):
         abort(501)
         return {"exports": []}
 
-
     def post(self):
         """
             Create a new export
@@ -31,7 +30,7 @@ class ExportListResource(Resource):
                 400: {}
                 401: {}
                 200:
-                    description: An export will been created. An ID to reference it by will be returned as part of this
+                    description: An export will been created
         """
         abort(501)
         return {"exports": []}

@@ -29,7 +29,6 @@ class ExportResource(Resource):
         abort(501)
         return
 
-
     def delete(self, export_id):
         """
             Delete an export.

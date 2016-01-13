@@ -1,9 +1,12 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, render_template
 from flask_restful import Api
-import logging, os, glob
+import logging
+import os
+import glob
 
 logging.basicConfig(level=logging.INFO)
-STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'gen')
+STATIC_DIR = os.path.join(os.path.dirname(
+    os.path.abspath(__file__)), 'static', 'gen')
 
 app = Flask(__name__,
             static_folder='static',
@@ -13,6 +16,7 @@ app = Flask(__name__,
 @app.route('/docs')
 def docs():
     return render_template('docs.html')
+
 
 @app.route('/')
 def index():
