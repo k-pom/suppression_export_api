@@ -1,11 +1,19 @@
-- Make a real readme instead of a todo List
+## Mailgun Suppression API
+What this does...
 
-- bottom Section: Default to "Enter you api Key"
 
-- When api key is valid, load domain on left section
+### Example
+View demo here (todo: Make this a real link)
 
-- when domain is clicked, list exports
+### Installation
 
-- export delete (on delete click)
-
-- Create new delete on button
+### To Do
+- JS: List Exports
+- JS: Download Export
+- JS: Delete Export
+- JS: Create Export
+- Python: Create Export
+- Python: Delete Export
+- Python: Get Export
+- Python/Cron: Generate export data (cloud files integration)
+- Misc: Mongo connection after fork

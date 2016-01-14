@@ -3,6 +3,8 @@ from flask_restful import Api
 import logging
 import os
 import glob
+import sys
+import traceback
 
 logging.basicConfig(level=logging.INFO)
 STATIC_DIR = os.path.join(os.path.dirname(
@@ -29,7 +31,19 @@ def index():
 
 class Service(Api):
     def handle_error(self, e):
-        return self.make_response({"error": str(e)}, e.code)
+
+        t, val, trace = sys.exc_info()
+        last = traceback.extract_tb(trace).pop()
+
+        if type(e) == KeyError:
+            return self.make_response({
+                "error": "Key not found: {} at {}:{}".format(val, last[0], last[1])
+            }, 500)
+
+        try:
+            return self.make_response({"error": str(e)}, e.code)
+        except:
+            return self.make_response({"error": str(e)}, 500)
 
 
 api = Service(app)
