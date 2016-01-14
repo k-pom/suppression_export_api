@@ -12,7 +12,6 @@ View demo here (todo: Make this a real link)
 - JS: Download Export
 - JS: Delete Export
 - JS: Create Export
-- Python: Create Export
 - Python: Delete Export
 - Python: Get Export
 - Python/Cron: Generate export data (cloud files integration)
