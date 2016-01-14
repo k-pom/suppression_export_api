@@ -29,7 +29,7 @@ def index():
 
 class Service(Api):
     def handle_error(self, e):
-        return self.make_response({"error": str(e)}, 500)
+        return self.make_response({"error": str(e)}, e.code)
 
 
 api = Service(app)

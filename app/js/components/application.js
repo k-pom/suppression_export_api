@@ -17,9 +17,16 @@ export default class Application extends Component {
     render() {
         return (<div>
                     <NavBar login={this.props.login} />
-                    <div className='container'>
-                        <Domains domains={store.domains}/>
-                        <h1>initialheader</h1>
+                    <div className='container '>
+                        <div className='col-md-2'>
+                            <Domains domains={store.domains}/>
+                        </div>
+                        <div className='col-md-10'>
+
+                            <p>
+                                {this.props.login.valid ? 'Select a domain from the left' : 'Enter your API key above'}
+                            </p>
+                        </div>
                     </div>
                 </div>);
     }
