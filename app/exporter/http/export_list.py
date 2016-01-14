@@ -16,8 +16,7 @@ class ExportListResource(Resource):
                 200:
                     description: A list of exports is returned
         """
-        abort(501)
-        return {"exports": []}
+        return {"exports": [1,2,3]}
 
     def post(self):
         """
