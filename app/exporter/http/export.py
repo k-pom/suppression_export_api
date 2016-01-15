@@ -1,5 +1,4 @@
 from flask_restful import Resource
-from flask import abort
 from exporter.helpers.auth import require_user
 from exporter.logic import exports
 
