@@ -13,7 +13,7 @@ class ExportListResource(Resource):
             This route lists all exports the user has access to see
             ---
             tags:
-                - Export List
+                - Export
             parameters:
                 -
                     in: path
@@ -46,7 +46,7 @@ class ExportListResource(Resource):
             This route creates a fires of a call to create a new export.
             ---
             tags:
-                - Export List
+                - Export
             parameters:
                 -
                     in: path

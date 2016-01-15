@@ -1,18 +1,28 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { store } from '../store';
+import { listExports } from '../actions/exports';
 
 
 
 class DomainRow extends Component {
 
     proptypes: {
-        domain: PropType.object.isRequired
+        domain: PropType.object.isRequired,
+        login: PropType.object.isRequired
+    }
+
+    listExports(e, apiKey, domain){
+        store.dispatch(listExports(apiKey, domain));
+
     }
 
     render(){
         return (<div className='domainRow'>
-                    <a href="#">{this.props.domain.name}</a>
+                    <a href="#" onClick={e => this.listExports(e, this.props.login.apiKey, this.props.domain.name)}>
+                        {this.props.domain.name}
+                    </a>
                 </div>)
     }
 }
@@ -26,15 +36,13 @@ export default class Domains extends Component {
     }
 
     render() {
-        console.log("PROPS", this.props);
-
-
-        var rows = [];
-        this.props.domains.domainList.forEach(function(domain) {
-            rows.push(<DomainRow key={domain.name} domain={domain} />);
-        });
-
-
+        if(this.props.login.valid){
+            var rows = [];
+            var login = this.props.login
+            this.props.domains.domainList.forEach(function(domain) {
+                rows.push(<DomainRow key={domain.name} login={login} domain={domain} />);
+            });
+        }
         return (
             <div>
                 <h4>Domains</h4>

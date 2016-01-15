@@ -27,3 +27,10 @@ def create(user, domain, export_type):
     exports.insert_one(new_export.serialize())
 
     return new_export
+
+
+def delete(user, id):
+    exports.delete_one({
+        'user': user.hashed_key,
+        'id': id
+    })

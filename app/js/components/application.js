@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import NavBar from './header'
 import Domains from './domains'
+import Exports from './exports'
 import { store } from '../store';
 
 
@@ -22,10 +23,7 @@ export default class Application extends Component {
                             <Domains domains={store.domains}/>
                         </div>
                         <div className='col-md-10'>
-
-                            <p>
-                                {this.props.login.valid ? 'Select a domain from the left' : 'Enter your API key above'}
-                            </p>
+                            <Exports />
                         </div>
                     </div>
                 </div>);

@@ -17,7 +17,6 @@ export function verifyLogin(apiKey){
                     url: "/domains",
                     headers: { "X-Auth-Token": apiKey }
                 }).then(function(response){
-                    console.log("Firing event")
                     dispatch({type: DOMAINS_LOADED, data: response});
                 });
             }

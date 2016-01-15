@@ -5,7 +5,7 @@ from app import api, app as application
 
 resources = {
     '/domains/<string:domain>/exports': export_list.ExportListResource,
-    '/exports/<int:export_id>': export.ExportResource,
+    '/exports/<string:export_id>': export.ExportResource,
     '/users/<string:apiKey>': user.ApiKeyResource,
     '/domains': domains.DomainListResource,
     '/docs.json': docs.DocsResource

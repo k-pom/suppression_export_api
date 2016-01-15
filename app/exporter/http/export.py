@@ -1,35 +1,13 @@
 from flask_restful import Resource
 from flask import abort
+from exporter.helpers.auth import require_user
+from exporter.logic import exports
 
 
 class ExportResource(Resource):
 
-    def get(self, export_id):
-        """
-            Download a single export
-            This route is the full export download, as a CSV.
-
-            Note: This is NOT json.
-            ---
-            tags:
-                - Export
-            parameters:
-                -
-                    in: path
-                    name: export_id
-                    description: Export Id
-                    type: int
-                    required: true
-            responses:
-                401: {}
-                404: {}
-                200:
-                    description: A csv of the export download
-        """
-        abort(501)
-        return
-
-    def delete(self, export_id):
+    @require_user
+    def delete(self, user, export_id):
         """
             Delete an export.
             Delete the given export, both from the database, and from the
@@ -50,5 +28,5 @@ class ExportResource(Resource):
                 200:
                     description: The export has been deleted
         """
-        abort(501)
+        exports.delete(user, export_id)
         return {"success": True}

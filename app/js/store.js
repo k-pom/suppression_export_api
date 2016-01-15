@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import routerReducer from './reducers/router';
 import loginReducer from './reducers/login';
 import domainReducer from './reducers/domains';
+import exportReducer from './reducers/export';
 
 // wire up the application
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
@@ -13,5 +14,6 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 export const store = createStoreWithMiddleware(combineReducers({
   router: routerReducer,
   login: loginReducer,
-  domains: domainReducer
+  domains: domainReducer,
+  exports: exportReducer
 }));

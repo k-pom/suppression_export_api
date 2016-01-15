@@ -12,7 +12,7 @@ export default class NavBar extends Component {
 
     updateApiKey(e){
         if(e.target.value.length > 0 ){
-            store.dispatch(verifyLogin(e.target.value));            
+            store.dispatch(verifyLogin(e.target.value));
         }
     }
 
@@ -40,7 +40,7 @@ export default class NavBar extends Component {
                         <input type="text"
                            className="form-control"
                            placeholder="ApiKey..."
-                           onBlur={e => this.updateApiKey(e)}
+                           onChange={e => this.updateApiKey(e)}
                         //    value={this.state.login.apiKey}
                            />
                   </form>
