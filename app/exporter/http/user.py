@@ -1,4 +1,6 @@
 from flask_restful import Resource
+from exporter.logic import mailgun
+from exporter.models.user import User
 import requests
 
 
@@ -25,6 +27,8 @@ class ApiKeyResource(Resource):
 
         url = "https://api.mailgun.net/v3/domains"
 
-        response = requests.get(url, auth=('api', apiKey))
-        valid = (response.status_code <= 299)
-        return {"apiKey": apiKey, "valid": valid}
+        try:
+            mailgun.list_domains(User(apiKey))
+            return {"apiKey": apiKey, "valid": True}
+        except:
+            return {"apiKey": apiKey, "valid": False}

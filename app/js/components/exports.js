@@ -28,11 +28,16 @@ class ExportRow extends Component {
             icon = <span>{this.props.export.type}</span>
         }
 
+        var downloadButton = <a className='btn btn-default' href={this.props.export.filename}>Download</a>
+
+
         return (<tr className='domainRow'>
                     <td>{icon}</td>
                     <td>{this.props.export.type}</td>
                     <td>{this.props.export.status}</td>
+                    <td>{this.props.export.total}</td>
                     <td>{this.props.export.created_at}</td>
+                    <td>{(this.props.export.status == "completed" && this.props.export.total > 0) ? downloadButton : "" }</td>
                     <td>
                         <span className='btn btn-danger' onClick={e => this.deleteExport(e, this.props.login.apiKey, this.props.export)}>
                             Delete
@@ -56,7 +61,6 @@ export default class Exports extends Component {
 
 
     render() {
-        console.log(this.props);
         if(!this.props.login.valid){
             return <p>Enter a valid api key above</p>
         } else if (!this.props.exports.domain){
@@ -101,7 +105,9 @@ export default class Exports extends Component {
                             <th></th>
                             <th>Type</th>
                             <th>Status</th>
+                            <th>Total</th>
                             <th>Created At</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>

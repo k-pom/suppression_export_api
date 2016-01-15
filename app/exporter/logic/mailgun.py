@@ -10,6 +10,7 @@ def _get(url, user_key):
 def list_domains(user):
     url = "{}/domains".format(endpoint)
     response = _get(url, user.key)
+    response.raise_for_status()
     return response.json()['items']
 
 

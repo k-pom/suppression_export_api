@@ -6,7 +6,7 @@ type, grouped by domain, at the time of the file creation.
 Libraries
  - Flask (for server side code / API)
  - Mongo DB (for storage of export metadata)
- - Cloud Files (for raw file storage and serving)
+ - Boto.s3 (for remote file storage)
  - Swagger (for api documentation)
  - React/Redux (frontend UI)
  - Bootstrap (css/templating)
@@ -18,7 +18,6 @@ View demo here (todo: Make this a real link)
 TODO: Provide installation instructions
 
 ### To Do
-- JS: Download Export
 - Misc: Mongo connection after fork?
 - Setup on production
 - Tool tips on status/type

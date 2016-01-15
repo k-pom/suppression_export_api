@@ -356,6 +356,12 @@ var ExportRow = (function (_Component) {
             );
         }
 
+        var downloadButton = _react2['default'].createElement(
+            'a',
+            { className: 'btn btn-default', href: this.props['export'].filename },
+            'Download'
+        );
+
         return _react2['default'].createElement(
             'tr',
             { className: 'domainRow' },
@@ -377,7 +383,17 @@ var ExportRow = (function (_Component) {
             _react2['default'].createElement(
                 'td',
                 null,
+                this.props['export'].total
+            ),
+            _react2['default'].createElement(
+                'td',
+                null,
                 this.props['export'].created_at
+            ),
+            _react2['default'].createElement(
+                'td',
+                null,
+                this.props['export'].status == "completed" && this.props['export'].total > 0 ? downloadButton : ""
             ),
             _react2['default'].createElement(
                 'td',
@@ -412,7 +428,6 @@ var Exports = (function (_Component2) {
     Exports.prototype.render = function render() {
         var _this2 = this;
 
-        console.log(this.props);
         if (!this.props.login.valid) {
             return _react2['default'].createElement(
                 'p',
@@ -511,8 +526,14 @@ var Exports = (function (_Component2) {
                         _react2['default'].createElement(
                             'th',
                             null,
+                            'Total'
+                        ),
+                        _react2['default'].createElement(
+                            'th',
+                            null,
                             'Created At'
                         ),
+                        _react2['default'].createElement('th', null),
                         _react2['default'].createElement('th', null)
                     )
                 ),

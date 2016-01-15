@@ -48,6 +48,7 @@ def create_file(export):
 
     filename = '/tmp/{}-{}.csv'.format(export.domain, uuid4())
     headers = False
+    total = 0
     with open(filename, 'w') as fp:
         csv_writer = csv.writer(fp)
         try:
@@ -57,9 +58,9 @@ def create_file(export):
                 for item in response['items']:
                     if not headers:
                         headers = list(item.keys())
-                        print(headers)
                         csv_writer.writerow(headers)
 
+                    total += 1
                     csv_writer.writerow([item[h] for h in headers])
 
                 response = mailgun.list_suppressions(export, response['paging']['next'])
@@ -68,7 +69,8 @@ def create_file(export):
             fp.close()
 
         export.filename = s3.upload(filename)
-        export.status = "complete"
+        export.status = "completed"
+        export.total = total
         exports.update(export.key, export.serialize())
         os.remove(filename)
 
