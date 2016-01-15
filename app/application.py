@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-
+import os
 from exporter.http import export_list, export, docs, user, domains
 from app import api, app as application
 
@@ -15,4 +15,4 @@ for route, resource in resources.items():
     api.add_resource(resource, route)
 
 if __name__ == '__main__':
-    application.run(debug=True, processes=3)
+    application.run(host='0.0.0.0', port=os.environ.get('PORT', 5000), processes=3)
