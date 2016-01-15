@@ -33,7 +33,7 @@ class ExportListResource(Resource):
                     description: A list of exports is returned
         """
 
-        export_list = [e.serialize() for e in exports.list(user, domain)]
+        export_list = [e.serialize() for e in exports.list_exports(user, domain)]
         return {
             "total": len(export_list),
             "exports": export_list

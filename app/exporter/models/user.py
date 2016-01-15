@@ -1,4 +1,3 @@
-import hashlib
 from flask import abort
 
 
@@ -8,10 +7,6 @@ class User():
         if key is None:
             abort(401)
 
-        self.key = key
-        self.hashed_key = hashlib.sha256(key.encode('utf-8')).hexdigest()
+        # TODO: Validate the key
 
-    def serialize(self):
-        return {
-            "hashed_key": self.hashed_key
-        }
+        self.key = key

@@ -18,9 +18,9 @@ class ExportRow extends Component {
 
     render(){
         var icon;
-        if (this.props.export.type == 'bounce'){
+        if (this.props.export.type == 'bounces'){
             icon = <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-        } else if (this.props.export.type == 'unsubscribe'){
+        } else if (this.props.export.type == 'unsubscribes'){
             icon = <span className="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
         } else if (this.props.export.type == 'complaints'){
             icon = <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -79,12 +79,12 @@ export default class Exports extends Component {
                     </button>
                     <ul className="dropdown-menu">
                         <li>
-                            <a href="#" onClick={e => this.createExport(e, this.props.login.apiKey, this.props.exports.domain, 'bounce')}>
+                            <a href="#" onClick={e => this.createExport(e, this.props.login.apiKey, this.props.exports.domain, 'bounces')}>
                                 Bounce
                             </a>
                         </li>
                         <li>
-                            <a href="#" onClick={e => this.createExport(e, this.props.login.apiKey, this.props.exports.domain, 'unsubscribe')}>
+                            <a href="#" onClick={e => this.createExport(e, this.props.login.apiKey, this.props.exports.domain, 'unsubscribes')}>
                                 Unsubscribes
                             </a>
                         </li>

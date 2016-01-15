@@ -4,3 +4,4 @@ Flask-RESTful==0.3.4
 flask-swagger==0.2.10
 requests
 pymongo
+boto

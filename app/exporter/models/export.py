@@ -3,6 +3,8 @@ from datetime import datetime
 
 class Export():
 
+    TYPES = ['bounces', 'unsubscribes', 'complaints']
+
     def __init__(self, raw_data):
         self.id = raw_data.get("id", None)
         self.domain = raw_data['domain']
@@ -16,6 +18,18 @@ class Export():
             self.created_at = raw_data['created_at']
         else:
             self.created_at = datetime.now().isoformat()
+
+        self.key = {
+            'user': self.user,
+            'id': self.id
+        }
+
+    @classmethod
+    def key(cls, user, id):
+        return {
+            'user': user.key,
+            'id': id
+        }
 
     def serialize(self):
         return {

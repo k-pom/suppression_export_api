@@ -19,12 +19,11 @@ TODO: Provide installation instructions
 
 ### To Do
 - JS: Download Export
-- Python/Cron: Generate export data (cloud files integration)
-- Misc: Mongo connection after fork
-- Setup on heroku
+- Misc: Mongo connection after fork?
+- Setup on production
 - Tool tips on status/type
 
-### Feature List
+### Additional Feature List
 - Paginate the number of exports
 - Spinning Icons to indicate loading
 - Validate create (right now it will queue anything)
