@@ -12,17 +12,40 @@ Libraries
  - Bootstrap (css/templating)
 
 ### Example
-View demo here (todo: Make this a real link)
+View demo here: http://suppression-export.herokuapp.com/  
+(Could be slow at first if the heroku dino is sleeping)
 
 ### Installation
-TODO: Provide installation instructions
 
-### To Do
-- Misc: Mongo connection after fork?
-- Setup on production
-- Tool tips on status/type
+First step, clone the repo onto your development machine
+```
+    git clone git@github.com:k-pom/suppression_export_api.git
+    cd suppression_export_api
+```
+
+Set up the python side of things using virtualenvwrapper (https://virtualenvwrapper.readthedocs.org/en/latest/)
+```
+     mkvirtualenv suppression_export_api
+     pip -r requirements.txt
+```
+
+Set up the tool necessary for the frontend/js
+```     
+    npm install -g grunt-cli
+    npm install -g sass
+    npm install
+```
+
+Last step, configure your env variables and start the server
+```
+    cp .env.example .env
+    vi .env
+    source .env
+    grunt
+```
 
 ### Additional Feature List
+- Tooltip / UI features helpers
 - Paginate the number of exports
 - Spinning Icons to indicate loading
 - Validate create (right now it will queue anything)
