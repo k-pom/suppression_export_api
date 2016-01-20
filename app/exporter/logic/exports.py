@@ -47,6 +47,8 @@ def create(user, domain, export_type):
 
 def process_pending():
     for e in exports.find({'status': "pending"}):
+        e.status = 'processing'
+        exports.update(e.key, e.serialize())
         create_file(Export(e))
 
 
@@ -74,11 +76,13 @@ def create_file(export):
         finally:
             fp.close()
 
-        export.filename = s3.upload(filename)
-        export.status = "completed"
-        export.total = total
-        exports.update(export.key, export.serialize())
-        os.remove(filename)
+        try:
+            export.filename = s3.upload(filename)
+            export.status = "completed"
+            export.total = total
+            exports.update(export.key, export.serialize())
+        finally:    
+            os.remove(filename)
 
 
 def delete(user, id):
