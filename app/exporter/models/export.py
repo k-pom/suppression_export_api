@@ -1,3 +1,7 @@
+"""
+    This is the model class for an export.
+"""
+
 from datetime import datetime
 
 

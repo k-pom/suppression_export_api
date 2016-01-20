@@ -1,7 +1,10 @@
-from flask_restful import Resource
-from flask import request
+"""
+    This contains view methods for export lists (list and create)
+"""
 from exporter.helpers.auth import require_user
 from exporter.logic import exports
+from flask import request
+from flask_restful import Resource
 
 
 class ExportListResource(Resource):

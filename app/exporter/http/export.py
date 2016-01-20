@@ -1,6 +1,9 @@
-from flask_restful import Resource
+"""
+    This contains methods for single export (delete)
+"""
 from exporter.helpers.auth import require_user
 from exporter.logic import exports
+from flask_restful import Resource
 
 
 class ExportResource(Resource):

@@ -1,3 +1,7 @@
+"""
+    This module is responsible for all mailgun API calls.
+"""
+
 import requests
 
 endpoint = "https://api.mailgun.net/v3"

@@ -1,11 +1,17 @@
-from exporter.db import exports
+"""
+    This module contains all business logic around exports, including
+    validating ownership, creating new models, and processing pending
+    exports
+"""
 import os
-from flask import abort
 import csv
+from uuid import uuid4
+
+from exporter.db import exports
 from exporter.models.export import Export
 from exporter.logic import mailgun
-from uuid import uuid4
 from exporter.logic import s3
+from flask import abort
 
 
 def get(user, id):

@@ -1,7 +1,9 @@
+"""
+    This controls user related methods (ie, validate API Key)
+"""
 from flask_restful import Resource
 from exporter.logic import mailgun
 from exporter.models.user import User
-import requests
 
 
 class ApiKeyResource(Resource):
@@ -24,8 +26,6 @@ class ApiKeyResource(Resource):
                 200:
                     description: The token is valid
         """
-
-        url = "https://api.mailgun.net/v3/domains"
 
         try:
             mailgun.list_domains(User(apiKey))

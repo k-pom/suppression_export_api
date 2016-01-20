@@ -1,14 +1,17 @@
+"""
+This is app configuration, separate from application.py to
+allow for other parts of the application to grab app without
+circular dependencies.
+"""
+
+import sys
+import logging
+import traceback
 from flask import Flask, render_template
 from flask_restful import Api
-import logging
-import os
-import glob
-import sys
-import traceback
+from exporter.helpers.common import use_generated_assests
 
 logging.basicConfig(level=logging.INFO)
-STATIC_DIR = os.path.join(os.path.dirname(
-    os.path.abspath(__file__)), 'static', 'gen')
 
 app = Flask(__name__,
             static_folder='static',
@@ -21,11 +24,8 @@ def docs():
 
 
 @app.route('/')
-def index():
-    css_files = glob.glob(os.path.join(STATIC_DIR, '*.css'))
-    css = [os.path.split(item)[1] for item in css_files]
-    js_files = glob.glob(os.path.join(STATIC_DIR, '*.js'))
-    js = [os.path.split(item)[1] for item in js_files]
+@use_generated_assests
+def index(css, js):
     return render_template('index.html', css=css, js=js)
 
 

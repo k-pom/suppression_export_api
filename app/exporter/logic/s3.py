@@ -1,3 +1,6 @@
+"""
+    This module handles all interaction with S3
+"""
 import uuid
 import boto
 from boto.s3.key import Key

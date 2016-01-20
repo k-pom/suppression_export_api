@@ -1,6 +1,9 @@
-from flask_restful import Resource
+"""
+    All routes related to mailgun domains
+"""
 from exporter.helpers.auth import require_user
 from exporter.logic import mailgun
+from flask_restful import Resource
 
 
 class DomainListResource(Resource):

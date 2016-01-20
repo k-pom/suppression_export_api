@@ -1,7 +1,12 @@
+"""
+    This module includes all routes related to the swagger
+    documentation.
+"""
+
 from app import app
-from flask_swagger import swagger
-from flask_restful import Resource
 from flask import jsonify
+from flask_restful import Resource
+from flask_swagger import swagger
 
 
 class DocsResource(Resource):
