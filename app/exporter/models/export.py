@@ -31,7 +31,7 @@ class Export():
     @classmethod
     def key(cls, user, id):
         return {
-            'user': user.key,
+            'user': api_key,
             'id': id
         }
 

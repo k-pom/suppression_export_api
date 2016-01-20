@@ -10,7 +10,7 @@ from exporter.http import export_list, export, docs, user, domains
 resources = {
     '/domains/<string:domain>/exports': export_list.ExportListResource,
     '/exports/<string:export_id>': export.ExportResource,
-    '/users/<string:apiKey>': user.ApiKeyResource,
+    '/users/<string:api_key>': user.ApiKeyResource,
     '/domains': domains.DomainListResource,
     '/docs.json': docs.DocsResource
 }

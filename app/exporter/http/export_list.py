@@ -10,7 +10,7 @@ from flask_restful import Resource
 class ExportListResource(Resource):
 
     @require_user
-    def get(self, user, domain):
+    def get(self, api_key, domain):
         """
             List exports
             This route lists all exports the user has access to see
@@ -36,14 +36,14 @@ class ExportListResource(Resource):
                     description: A list of exports is returned
         """
 
-        export_list = [e.serialize() for e in exports.list_exports(user, domain)]
+        export_list = [e.serialize() for e in exports.list_exports(api_key, domain)]
         return {
             "total": len(export_list),
             "exports": export_list
         }
 
     @require_user
-    def post(self, user, domain):
+    def post(self, api_key, domain):
         """
             Create a new export
             This route creates a fires of a call to create a new export.
@@ -81,5 +81,5 @@ class ExportListResource(Resource):
         """
         data = request.get_json(force=True)
 
-        new_export = exports.create(user, domain, data['type'])
+        new_export = exports.create(api_key, domain, data['type'])
         return {"export": new_export.serialize()}

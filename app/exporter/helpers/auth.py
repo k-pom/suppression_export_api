@@ -1,7 +1,7 @@
 """
 Auth related helper methods
 """
-from exporter.models.user import User
+from flask import abort
 from flask import request
 from functools import wraps
 
@@ -13,7 +13,11 @@ def require_user(f):
     """
     @wraps(f)
     def wrapper(*args, **kwargs):
-        kwargs['user'] = User(request.headers.get('X-Auth-Token', None))
+        kwargs['api_key'] = request.headers.get('X-Auth-Token', None)
+
+        if kwargs['api_key'] is None:
+            abort(401)
+            
         # TODO: Validate they are a real user
         return f(*args, **kwargs)
 

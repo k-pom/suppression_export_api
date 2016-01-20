@@ -19,22 +19,22 @@ def get(user, id):
     return Export(export)
 
 
-def list_exports(user, domain):
+def list_exports(api_key, domain):
     export_list = exports.find({
         'domain': domain,
-        'user': user.key
+        'user': api_key
     })
     return [Export(e) for e in export_list]
 
 
-def create(user, domain, export_type):
+def create(api_key, domain, export_type):
 
     if export_type not in Export.TYPES:
         abort(400)
 
     new_export = Export({
         "domain": domain,
-        "user": user.key,
+        "user": api_key,
         "type": export_type,
         "status": "pending",
         "id": str(uuid4())
@@ -81,7 +81,7 @@ def create_file(export):
             export.status = "completed"
             export.total = total
             exports.update(export.key, export.serialize())
-        finally:    
+        finally:
             os.remove(filename)
 
 

@@ -3,12 +3,11 @@
 """
 from flask_restful import Resource
 from exporter.logic import mailgun
-from exporter.models.user import User
 
 
 class ApiKeyResource(Resource):
 
-    def get(self, apiKey):
+    def get(self, api_key):
         """
             Validate an API Key
             Calling mailgun, validate the API key
@@ -18,7 +17,7 @@ class ApiKeyResource(Resource):
             parameters:
                 -
                     in: path
-                    name: apiKey
+                    name: api_key
                     description: API Key
                     type: string
                     required: true
@@ -28,7 +27,7 @@ class ApiKeyResource(Resource):
         """
 
         try:
-            mailgun.list_domains(User(apiKey))
-            return {"apiKey": apiKey, "valid": True}
+            mailgun.list_domains(api_key)
+            return {"api_key": api_key, "valid": True}
         except:
-            return {"apiKey": apiKey, "valid": False}
+            return {"api_key": api_key, "valid": False}

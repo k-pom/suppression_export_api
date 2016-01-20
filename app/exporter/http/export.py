@@ -9,7 +9,7 @@ from flask_restful import Resource
 class ExportResource(Resource):
 
     @require_user
-    def delete(self, user, export_id):
+    def delete(self, api_key, export_id):
         """
             Delete an export.
             Delete the given export, both from the database, and from the
@@ -30,5 +30,5 @@ class ExportResource(Resource):
                 200:
                     description: The export has been deleted
         """
-        exports.delete(user, export_id)
+        exports.delete(api_key, export_id)
         return {"success": True}
