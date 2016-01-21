@@ -36,12 +36,12 @@ export default class NavBar extends Component {
                     <li><a href="http://www.mailgun.com">Mailgun</a></li>
                   </ul>
                   <form className="navbar-form navbar-right">
-                    {(this.props.login.apiKey == "") ? "" : icon }
+                    {(this.props.login.api_key == "") ? "" : icon }
                         <input type="text"
                            className="form-control"
                            placeholder="ApiKey..."
                            onChange={e => this.updateApiKey(e)}
-                        //    value={this.state.login.apiKey}
+                        //    value={this.state.login.api_key}
                            />
                   </form>
                 </div>

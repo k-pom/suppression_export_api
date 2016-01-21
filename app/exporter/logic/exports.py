@@ -32,6 +32,8 @@ def create(api_key, domain, export_type):
     if export_type not in Export.TYPES:
         abort(400)
 
+    print(api_key)
+    print("JDFKDLJFLSDJFLDSJFLDKSJFLSD")
     new_export = Export({
         "domain": domain,
         "user": api_key,
@@ -47,13 +49,23 @@ def create(api_key, domain, export_type):
 
 def process_pending():
     for e in exports.find({'status': "pending"}):
-        e.status = 'processing'
-        exports.update(e.key, e.serialize())
-        create_file(Export(e))
-
+        try:
+            export = Export(e)
+            export.status = 'processing'
+            exports.update(export.key, export.serialize())
+            create_file(export)
+        except Exception as e:
+            export.status = 'error'
+            exports.update(export.key, export.serialize())
+            print(str(e))  # Keep processing files, but log it
 
 def create_file(export):
-
+    """
+        This creates the export file for a given export. This creates
+        a temp file, downloads all suppressions, writing them to the
+        temp file. After it is complete is uploads the file to s3, and
+        updates the export record in the database.
+    """
     filename = '/tmp/{}-{}.csv'.format(export.domain, uuid4())
     headers = False
     total = 0
@@ -73,10 +85,6 @@ def create_file(export):
 
                 response = mailgun.list_suppressions(export, response['paging']['next'])
 
-        finally:
-            fp.close()
-
-        try:
             export.filename = s3.upload(filename)
             export.status = "completed"
             export.total = total
@@ -85,5 +93,5 @@ def create_file(export):
             os.remove(filename)
 
 
-def delete(user, id):
-    exports.delete_one(Export.key(user, id))
+def delete(api_key, id):
+    exports.delete_one(Export.key(api_key, id))

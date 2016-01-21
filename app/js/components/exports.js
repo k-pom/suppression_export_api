@@ -39,7 +39,7 @@ class ExportRow extends Component {
                     <td>{this.props.export.created_at}</td>
                     <td>{(this.props.export.status == "completed" && this.props.export.total > 0) ? downloadButton : "" }</td>
                     <td>
-                        <span className='btn btn-danger' onClick={e => this.deleteExport(e, this.props.login.apiKey, this.props.export)}>
+                        <span className='btn btn-danger' onClick={e => this.deleteExport(e, this.props.login.api_key, this.props.export)}>
                             Delete
                         </span>
                     </td>
@@ -83,17 +83,17 @@ export default class Exports extends Component {
                     </button>
                     <ul className="dropdown-menu">
                         <li>
-                            <a href="#" onClick={e => this.createExport(e, this.props.login.apiKey, this.props.exports.domain, 'bounces')}>
+                            <a href="#" onClick={e => this.createExport(e, this.props.login.api_key, this.props.exports.domain, 'bounces')}>
                                 Bounce
                             </a>
                         </li>
                         <li>
-                            <a href="#" onClick={e => this.createExport(e, this.props.login.apiKey, this.props.exports.domain, 'unsubscribes')}>
+                            <a href="#" onClick={e => this.createExport(e, this.props.login.api_key, this.props.exports.domain, 'unsubscribes')}>
                                 Unsubscribes
                             </a>
                         </li>
                         <li>
-                            <a href="#" onClick={e => this.createExport(e, this.props.login.apiKey, this.props.exports.domain, 'complaints')}>
+                            <a href="#" onClick={e => this.createExport(e, this.props.login.api_key, this.props.exports.domain, 'complaints')}>
                                 Complaints
                             </a>
                         </li>

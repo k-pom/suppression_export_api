@@ -24,6 +24,12 @@ class ExportResource(Resource):
                     description: Export Id
                     type: int
                     required: true
+                -
+                    in: header
+                    name: X-Auth-Token
+                    description: Mailgun token
+                    type: string
+                    required: true
             responses:
                 404: {}
                 401: {}

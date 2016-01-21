@@ -5,12 +5,19 @@ import uuid
 import boto
 from boto.s3.key import Key
 
-conn = boto.connect_s3()
+conn = False
 
-bucket = conn.get_bucket("ninja-kpom-mailgun")
-
+def initalize_connection():
+    global conn
+    if not conn:
+        conn = boto.connect_s3()
+    return conn
 
 def upload(filename):
+
+    initalize_connection()
+    bucket = conn.get_bucket("ninja-kpom-mailgun")
+
     k = Key(bucket)
     k.key = "{}.csv".format(uuid.uuid4())
     k.set_contents_from_filename(filename)

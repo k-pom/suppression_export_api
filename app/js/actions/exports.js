@@ -36,6 +36,7 @@ export function deleteExport(apiKey, ex){
 }
 
 export function createExport(apiKey, domain, type){
+    console.log("Creating export", apiKey);
     return (dispatch) => {
         return new Promise(function(success, failure){
             $.ajax({

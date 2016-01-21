@@ -20,7 +20,7 @@ class DomainRow extends Component {
 
     render(){
         return (<div className='domainRow'>
-                    <a href="#" onClick={e => this.listExports(e, this.props.login.apiKey, this.props.domain.name)}>
+                    <a href="#" onClick={e => this.listExports(e, this.props.login.api_key, this.props.domain.name)}>
                         {this.props.domain.name}
                     </a>
                 </div>)

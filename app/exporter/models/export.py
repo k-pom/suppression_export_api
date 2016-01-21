@@ -29,7 +29,7 @@ class Export():
         }
 
     @classmethod
-    def key(cls, user, id):
+    def key(cls, api_key, id):
         return {
             'user': api_key,
             'id': id
